@@ -38,14 +38,8 @@ export const createTopic = (topic) => {
 
 export const pushTopic = (id, topic) => {
     return (dispatch) => {
-        console.log("PUSH_TOPIC")
-        firebase.database().ref('Topics').push({
-            id: id,
-            topic: topic
+        firebase.database().ref(`Topics/${topic}/Tweets/`).push({
+            ID: id
         });
     };
 };
-
-
-
-
