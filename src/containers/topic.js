@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import { saveTopic } from '../actions/index';
 
-export default class Topic extends React.Component {
+class Topic extends React.Component {
     constructor(props) {
         super(props);
 
@@ -12,38 +12,12 @@ export default class Topic extends React.Component {
             input: ''
         };
 
-    };
-
-    render() {
-        return (
-            <div className="topic row">
-                <div className="card">
-                    <div className="card-header">
-                        <h4>{this.props.topic.Topic}</h4>
-                    </div>
-                    <div className="card-block">
-                        <img className="profile-avatar" src={this.props.topic.Tweet.user.profile_image_url} alt="" />
-                        {this.props.topic.Tweet.text}<br />
-                        {this.props.topic.Tweet.created_at}<br />
-                        {this.props.topic.Tweet.user.name}<br />
-                        {this.props.topic.Tweet.user.location}<br />
-                    </div>
-                    <div className="card-footer">
-
-                    </div>
-                </div>
-            </div >
-        );
-    };
-};
-
-
-/*
-
         this.onInputChange = this.onInputChange.bind(this);
         this.onFormSubmit = this.onFormSubmit.bind(this);
 
-onInputChange(event) {
+    };
+
+    onInputChange(event) {
         this.setState({
             input: event.target.value
         });
@@ -55,11 +29,21 @@ onInputChange(event) {
         this.setState({ input: '' });
     };
 
-  <div className="topic row">
+    render() {
+        return (
+            <div className="topic">
                 <div className="card">
-                    <div className="card-header">{this.props.topic.Topic}</div>
+                    <h4>{this.props.topic.Topic}</h4>
                     <div className="card-block">
-                        
+                        <img className="profile-avatar" src={this.props.topic.Tweet.user.profile_image_url} alt="" />
+                        <div className="alert alert-light" role="alert">
+                            {this.props.topic.Tweet.text}
+                        </div>
+                        <div className="alert alert-light" role="alert">
+                            {this.props.topic.Tweet.created_at}<br />
+                            {this.props.topic.Tweet.user.name}<br />
+                            {this.props.topic.Tweet.user.location}<br />
+                        </div>
                     </div>
                     <div className="card-footer">
                         <form onSubmit={this.onFormSubmit} className="input-group">
@@ -76,9 +60,12 @@ onInputChange(event) {
                     </div>
                 </div>
             </div >
+        );
+    };
+};
+
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ saveTopic: saveTopic }, dispatch);
 };
 
 export default connect(null, mapDispatchToProps)(Topic);
-*/

@@ -1,30 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { initializeTweets } from '../actions/index';
+import { initialize } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 import CreateTopic from '../containers/create_topic';
-import TopicList from '../containers/topic_list';
-import Items from '../containers/items';
 
 class App extends React.Component {
-  
+
   componentWillMount() {
-    this.props.initializeTweets();
+    this.props.initialize();
   }
 
   render() {
     return (
-      <div className="container">
+      <div>
         <CreateTopic />
-        <TopicList />
       </div>
     );
   };
 };
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ initializeTweets: initializeTweets }, dispatch);
+  return bindActionCreators({ initialize }, dispatch);
 };
 
 export default connect(null, mapDispatchToProps)(App);

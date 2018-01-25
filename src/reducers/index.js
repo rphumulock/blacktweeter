@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import localTopicReducer from '../reducers/local_topic_reducer';
-import savedTopicReducer from '../reducers/saved_topic_reducer';
+import topicReducer from '../reducers/reducer_topic';
 
 const rootReducer = combineReducers({
-  localTopics: localTopicReducer,
-  savedTopics: savedTopicReducer
+  topics: topicReducer
 });
 
 export default rootReducer;

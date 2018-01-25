@@ -13,18 +13,16 @@ class TopicList extends React.Component {
         }
     };
 
-    renderTopics(topic) {
-        return (
-            <div key={topic.key} className="row">
-                <Topic topic={topic} />
-            </div >
-        );
+    renderTopics() {
+        this.props.topics.forEach(() => {
+            console.log('g');
+        })
     };
 
     render() {
         return (
-            <div className="container">
-                {this.props.topics.map(this.renderTopics)}
+            <div>
+                <button onClick={renderTopics}>click</button>
             </div>
         );
     };
@@ -32,8 +30,19 @@ class TopicList extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        topics: state.savedTopics
+        topics: state.topics
     };
 };
 
 export default connect(mapStateToProps)(TopicList);
+
+
+/*         return (
+
+            
+            <div key={topic.key}>
+                <Topic topic={topic} />
+            </div >
+        );
+        
+        {this.props.topics.map(this.renderTopics)}*/
