@@ -1,2 +1,3 @@
-export const CREATE_TOPIC = 'CREATE_TOPIC';
-export const FETCH_TWEETS = 'FETCH_TWEETS';
+export const PUSH = 'PUSH';
+export const FETCH = 'FETCH';
+export const INITIALIZE = 'INITIALIZE';

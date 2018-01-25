@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import TopicReducer from '../reducers/reducer_topic';
-import TweetReducer from '../reducers/reducer_tweet';
+import localTopicReducer from '../reducers/local_topic_reducer';
+import savedTopicReducer from '../reducers/saved_topic_reducer';
 
 const rootReducer = combineReducers({
-  topics: TopicReducer,
-  tweets: TweetReducer
+  localTopics: localTopicReducer,
+  savedTopics: savedTopicReducer
 });
 
 export default rootReducer;

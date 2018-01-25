@@ -1,45 +1,53 @@
 import firebase from '../config/firebase';
 import {
-    CREATE_TOPIC,
-    FETCH_TWEETS
+    PUSH,
+    FETCH,
+    INITIALIZE
 } from '../constants/constants';
 
 export const initializeTweets = () => {
     return (dispatch) => {
-        firebase.database().ref('tweets').once('value', (snapshot) => {
-            console.log('INITIALIZE')
-            dispatch({
-                type: FETCH_TWEETS,
-                payload: snapshot.val()
-            });
-        });
-    };
-};
+        firebase.database().ref('Topics').once('value', (snapshot) => {
 
-export const fetchTweets = () => {
-    return (dispatch) => {
-        firebase.database().ref('tweets').on('child_added', (snapshot) => {
-            console.log("FETCH_TWEETS");
+            let returnArr = [];
+            snapshot.forEach((childSnapshot) => {
+                let item = childSnapshot.val();
+                item.key = childSnapshot.key;
+                returnArr.push(item);
+            })
+
             dispatch({
-                type: FETCH_TWEETS,
-                payload: snapshot.val()
+                type: INITIALIZE,
+                payload: returnArr
             });
         });
     };
 };
 
 export const createTopic = (topic) => {
-    console.log("CREATE_TOPIC")
     return {
-        type: CREATE_TOPIC,
+        type: PUSH,
         payload: topic
     };
 };
 
-export const pushTopic = (id, topic) => {
+export const saveTopic = (id, topic) => {
     return (dispatch) => {
-        firebase.database().ref(`Topics/${topic}/Tweets/`).push({
+        firebase.database().ref('Topics').push({
+            Topic: topic,
             ID: id
         });
     };
 };
+
+
+/*export const fetchTweets = () => {
+    return (dispatch) => {
+        firebase.database().ref('tweets').on('child_added', (snapshot) => {
+            dispatch({
+                type: FETCH,
+                payload: snapshot.val()
+            });
+        });
+    };
+};*/

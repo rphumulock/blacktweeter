@@ -15,7 +15,7 @@ class TopicList extends React.Component {
 
     renderTopics(topic) {
         return (
-            <div key={topic} className="row">
+            <div key={topic.key} className="row">
                 <Topic topic={topic} />
             </div >
         );
@@ -32,7 +32,7 @@ class TopicList extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        topics: state.topics
+        topics: state.savedTopics
     };
 };
 

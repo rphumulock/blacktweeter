@@ -2,21 +2,48 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { pushTopic } from '../actions/index';
+import { saveTopic } from '../actions/index';
 
-class Topic extends React.Component {
+export default class Topic extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            input: '',
-            tweets: []
+            input: ''
         };
-        this.onInputChange = this.onInputChange.bind(this);
-        this.onFormSubmit = this.onFormSubmit.bind(this);
+
     };
 
-    onInputChange(event) {
+    render() {
+        return (
+            <div className="topic row">
+                <div className="card">
+                    <div className="card-header">
+                        <h4>{this.props.topic.Topic}</h4>
+                    </div>
+                    <div className="card-block">
+                        <img className="profile-avatar" src={this.props.topic.Tweet.user.profile_image_url} alt="" />
+                        {this.props.topic.Tweet.text}<br />
+                        {this.props.topic.Tweet.created_at}<br />
+                        {this.props.topic.Tweet.user.name}<br />
+                        {this.props.topic.Tweet.user.location}<br />
+                    </div>
+                    <div className="card-footer">
+
+                    </div>
+                </div>
+            </div >
+        );
+    };
+};
+
+
+/*
+
+        this.onInputChange = this.onInputChange.bind(this);
+        this.onFormSubmit = this.onFormSubmit.bind(this);
+
+onInputChange(event) {
         this.setState({
             input: event.target.value
         });
@@ -24,15 +51,13 @@ class Topic extends React.Component {
 
     onFormSubmit(event) {
         event.preventDefault();
-        this.props.pushTopic(this.state.input, this.props.topic);
+        this.props.saveTopic(this.state.input, this.props.topic);
         this.setState({ input: '' });
     };
 
-    render() {
-        return (
-            <div className="topic row">
+  <div className="topic row">
                 <div className="card">
-                    <div className="card-header">{this.props.topic}</div>
+                    <div className="card-header">{this.props.topic.Topic}</div>
                     <div className="card-block">
                         
                     </div>
@@ -51,18 +76,9 @@ class Topic extends React.Component {
                     </div>
                 </div>
             </div >
-        );
-    };
-};
-
-function mapStateToProps(state) {
-    return {
-        tweets: state.tweets
-    };
-};
-
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ pushTopic: pushTopic }, dispatch);
+    return bindActionCreators({ saveTopic: saveTopic }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Topic);
+export default connect(null, mapDispatchToProps)(Topic);
+*/

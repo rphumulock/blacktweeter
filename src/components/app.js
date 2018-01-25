@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import CreateTopic from '../containers/create_topic';
 import TopicList from '../containers/topic_list';
+import Items from '../containers/items';
 
 class App extends React.Component {
   

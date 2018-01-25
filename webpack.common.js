@@ -31,7 +31,7 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(['./build']),
-        new ExtractTextPlugin("styles.css"),
+        new ExtractTextPlugin("style.css"),
         new Webpack.optimize.CommonsChunkPlugin({
             name: 'runtime'
         }),
