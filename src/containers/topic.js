@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { saveTopic } from '../actions/index';
+import TopicDetail from './topic_detail';
+import { pushTweet } from '../actions/index';
 
 class Topic extends React.Component {
     constructor(props) {
@@ -25,27 +26,21 @@ class Topic extends React.Component {
 
     onFormSubmit(event) {
         event.preventDefault();
-        this.props.saveTopic(this.state.input, this.props.topic);
+        this.props.pushTweet(this.state.input, this.props.topic.key);
         this.setState({ input: '' });
     };
 
     render() {
         return (
-            <div className="topic">
-                <div className="card">
-                    <h4>{this.props.topic.Topic}</h4>
-                    <div className="card-block">
-                        <img className="profile-avatar" src={this.props.topic.Tweet.user.profile_image_url} alt="" />
-                        <div className="alert alert-light" role="alert">
-                            {this.props.topic.Tweet.text}
-                        </div>
-                        <div className="alert alert-light" role="alert">
-                            {this.props.topic.Tweet.created_at}<br />
-                            {this.props.topic.Tweet.user.name}<br />
-                            {this.props.topic.Tweet.user.location}<br />
-                        </div>
+            <div className="card">
+                <div className="card-body">
+                    <h5 className="card-title">Card title</h5>
+                    <div className="card-body">
+                        <TopicDetail topic={this.props.topic} />
                     </div>
-                    <div className="card-footer">
+                </div>
+                <div className="card-footer">
+                    <div className="col-sm-6">
                         <form onSubmit={this.onFormSubmit} className="input-group">
                             <input
                                 placeholder="Topic"
@@ -54,18 +49,18 @@ class Topic extends React.Component {
                                 onChange={this.onInputChange}
                             />
                             <span className="input-group-btn">
-                                <button type="submit" className="btn btn-secondary">Find Tweet</button>
+                                <button type="submit" className="btn btn-primary">Find Tweet</button>
                             </span>
                         </form>
                     </div>
                 </div>
-            </div >
+            </div>
         );
     };
-};
+}
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ saveTopic: saveTopic }, dispatch);
+    return bindActionCreators({ pushTweet }, dispatch);
 };
 
 export default connect(null, mapDispatchToProps)(Topic);

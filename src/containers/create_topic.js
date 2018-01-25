@@ -3,7 +3,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 /* USER */
-import { push } from '../actions/index';
+import { pushTopic } from '../actions/index';
 
 class CreateTopic extends React.Component {
     constructor(props) {
@@ -23,7 +23,7 @@ class CreateTopic extends React.Component {
 
     onFormSubmit(event) {
         event.preventDefault();
-        this.props.push(this.state.topic);
+        this.props.pushTopic(this.state.topic);
         this.setState({ topic: '' });
     };
 
@@ -51,7 +51,7 @@ class CreateTopic extends React.Component {
 };
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ push }, dispatch);
+    return bindActionCreators({ pushTopic }, dispatch);
 };
 
 export default connect(null, mapDispatchToProps)(CreateTopic);

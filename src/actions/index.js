@@ -1,9 +1,65 @@
 import firebase from '../config/firebase';
 import {
-    PUSH,
+    PUSH_TOPIC,
+    PUSH_TWEET,
     FETCH,
     INITIALIZE
 } from '../constants/constants';
+
+/* OPTIMIZE THIS LATER */
+export const pushTopic = (topic) => {
+    return (dispatch) => {
+        firebase.database().ref('Topics').once("value").then((snapShot) => {
+            const action = {
+                type: PUSH_TOPIC
+            }
+            let found = false;
+            snapShot.forEach((childSnapshot) => {
+                let child = childSnapshot.val()
+                if (child.Topic === topic) {
+                    found = true;
+                }
+            });
+
+            if (found) {
+                action.payload = 'DUPLICATE';
+                dispatch(action);
+            } else {
+                action.payload = {
+                    Topic: topic
+                }
+                const key = firebase.database().ref('Topics').push({ Topic: topic }).key;
+                /*firebase.database().ref('Topics').push({ Topic: topic }).then((snapShot) => {
+                    action.payload.key = snapShot.key;
+                    dispatch(action);
+                })*/
+                action.payload.key = key;
+                dispatch(action);
+            }
+        });
+    };
+};
+
+/* OPTIMIZE THIS LATER */
+export const pushTweet = (id, topicKey) => {
+    return (dispatch) => {
+        console.log(topicKey);
+        firebase.database().ref('Topics').child(topicKey).on("value", (snapShot) => {
+            snapShot.ref.update({
+                ID: id
+            })
+        });
+
+        dispatch({
+            type: PUSH_TWEET,
+            payload: {
+                ID: id,
+                Topic: topicKey
+            }
+        });
+    }
+}
+
 
 /* FETCHES ALL ITEMS STORED IN DATABASE */
 export const initialize = () => {
@@ -22,78 +78,3 @@ export const initialize = () => {
         });
     };
 };
-
-/* OPTIMIZE THIS LATER */
-export const push = (topic) => {
-    return (dispatch) => {
-        firebase.database().ref('Topics').once("value").then((snapshot) => {
-            const action = {
-                type: PUSH
-            }
-            let found = false;
-            snapshot.forEach((childSnapshot) => {
-                let child = childSnapshot.val()
-                if (child.Topic === topic) {
-                    found = true;
-                }
-            });
-
-            if (found) {
-                action.payload = 'DUPLICATE';
-            } else {
-                action.payload = {
-                    Topic: topic
-                }
-                firebase.database().ref('Topics').push({ Topic: topic });
-            }
-            dispatch(action);
-        });
-    };
-};
-
-
-
-/* 
-
-  if (check) {
-                console.log('1');
-                action.payload = 'Duplicate';
-            } else {
-                console.log('2');
-                action.payload = {
-                    Topic: topic
-                }
-                firebase.database().ref('Topics').push({ Topic: topic });
-            }
-   const action = {
-                type: PUSH
-            };
-            let check = false;
-   console.log('Key: ' + childSnapshot.key);
-                if (childSnapshot.Topic === topic) {
-                    action.type = PUSH;
-                    action.payload = 'Duplicate';
-                } else {
-                    const object = {
-                        Topic: topic
-                    }
-                    firebase.database().ref('Topics').push(object);
-                    action.type = PUSH;
-                    action.payload = object;
-                }
-
-
-PUSHES ITEM TO DATABASE 
-export const push = (id, topic) => {
-    return (dispatch) => {
-        const object = {
-            Topic: topic,
-            ID: id
-        }
-        firebase.database().ref('Topics').push(object);
-        dispatch({
-            type: PUSH,
-            payload: object
-        });
-    };
-};*/
