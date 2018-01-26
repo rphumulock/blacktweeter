@@ -44,7 +44,7 @@ export const pushTopic = (topic) => {
 export const pushTweet = (id, topicKey) => {
     return (dispatch) => {
         console.log(topicKey);
-        firebase.database().ref('Topics').child(topicKey).on("value", (snapShot) => {
+        firebase.database().ref('Topics').child(topicKey).once("value", (snapShot) => {
             snapShot.ref.update({
                 ID: id
             })
