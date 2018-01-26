@@ -34,25 +34,23 @@ class Topic extends React.Component {
         return (
             <div className="card">
                 <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
+                    <h5 className="card-title">{this.props.topic.Topic}</h5>
                     <div className="card-body">
                         <TopicDetail topic={this.props.topic} />
                     </div>
                 </div>
                 <div className="card-footer">
-                    <div className="col-sm-6">
-                        <form onSubmit={this.onFormSubmit} className="input-group">
-                            <input
-                                placeholder="Topic"
-                                className="form-control"
-                                value={this.state.input}
-                                onChange={this.onInputChange}
-                            />
-                            <span className="input-group-btn">
-                                <button type="submit" className="btn btn-primary">Find Tweet</button>
-                            </span>
-                        </form>
-                    </div>
+                    <form onSubmit={this.onFormSubmit} className="input-group">
+                        <input
+                            placeholder="Enter Tweet ID"
+                            className="form-control"
+                            value={this.state.input}
+                            onChange={this.onInputChange}
+                        />
+                        <span className="input-group-btn">
+                            <button type="submit" className="btn btn-primary">Fetch Tweet</button>
+                        </span>
+                    </form>
                 </div>
             </div>
         );
