@@ -5,7 +5,7 @@ import {
     FETCH_ALL
 } from '../constants/constants';
 
-/* OPTIMIZE THIS LATER */
+/* OPTIMIZE THIS LATER 
 export const pushTopic = (topic) => {
     return (dispatch) => {
         firebase.database().ref('Topics').once("value").then((snapShot) => {
@@ -19,7 +19,6 @@ export const pushTopic = (topic) => {
                     found = true;
                 }
             });
-
             if (found) {
                 action.payload = 'DUPLICATE';
                 dispatch(action);
@@ -33,7 +32,7 @@ export const pushTopic = (topic) => {
             }
         });
     };
-};
+};*/
 
 /* OPTIMIZE THIS LATER */
 export const pushTweet = (id, topicKey) => {
@@ -62,9 +61,9 @@ export const fetchAll = () => {
             let returnArr = [];
             snapshot.forEach((childSnapshot) => {
                 let item = childSnapshot.val();
-                item.key = childSnapshot.key;
+                item.Key = childSnapshot.key;
                 returnArr.push(item);
-            })
+            });
             dispatch({
                 type: FETCH_ALL,
                 payload: returnArr
@@ -72,3 +71,19 @@ export const fetchAll = () => {
         });
     };
 };
+
+/*                let current = childSnapshot.val();
+                let item = {
+                    Topic: current.Topic,
+                    Key: childSnapshot.key,
+                    Tweets: []
+                }
+
+                if (current.Tweets) {
+                    Object.keys(current.Tweets).map(function (key) {
+                        firebase.database().ref('Tweets').child(key).once('value', (tweet) => {
+                            item.Tweets.push(tweet.val());
+                        });
+                    });
+                }
+                returnArr.push(item);*/

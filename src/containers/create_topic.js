@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 /* USER */
 import { pushTopic } from '../actions/index';
+import firebase from '../config/firebase';
 
 class CreateTopic extends React.Component {
     constructor(props) {
@@ -23,26 +24,40 @@ class CreateTopic extends React.Component {
 
     onFormSubmit(event) {
         event.preventDefault();
-        this.props.pushTopic(this.state.topic);
-        this.setState({ topic: '' });
+        if (this.state.topic.length != 0) {
+            this.createTopic(this.state.topic);
+            this.setState({ topic: '' });
+        }
     };
+
+    createTopic(topic) {
+        firebase.database().ref('Requests').push({
+            type: 'CREATE_TOPIC',
+            topic: topic
+        });
+    }
 
     render() {
         return (
-            <div className="create-topic-container">
-                <div className="jumbotron">
-                    <div>
-                        <form onSubmit={this.onFormSubmit} className="input-group">
-                            <input
-                                placeholder="Topic"
-                                className="form-control"
-                                value={this.state.topic}
-                                onChange={this.onInputChange}
-                            />
-                            <span className="input-group-btn">
-                                <button type="submit" className="btn btn-secondary">Create Topic</button>
-                            </span>
-                        </form>
+            <div className="container">
+                <div className="row">
+                    <div className="col s12">
+                        <div className="card z-depth-2">
+                            <div class="card-content blue card-title white-text z-depth-2">Create Topic</div>
+                            <div className="row">
+                                <div className="card-action">
+                                    <form className="col s12" onSubmit={this.onFormSubmit}>
+                                        <div className="row">
+                                            <div className="input-field col s12">
+                                                <input id="topic" type="text" className="validate" value={this.state.topic} onChange={this.onInputChange} />
+                                                <label htmlFor="topic">Enter Topic Name</label>
+                                                <button className="btn waves-effect waves-light blue" type="submit" name="action">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

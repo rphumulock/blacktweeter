@@ -1,9 +1,39 @@
+body {
+    background-color: #e6ecf0;
+}
+
 .profile-avatar {
     width: 48px;
     height: 48px;
-    border-radius: 50%;
+    border-radius: 50% !important;
+    margin: 1rem 1rem 0 1rem;
 }
 
-.card {
-    margin: .5em;
+.ReactModal__Body--open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+
+.ReactModal__Content.ReactModal__Content--after-open {
+    width: 70%;
+}
+
+.ReactModal__Overlay {
+      z-index: 1;
+}
+
+.header-text {
+    text-align: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.ribbon {
+    text-align: center;
+    font-size: 2rem;
+    width: 100%;
+    height: 3rem;
+    color: white;
 }
