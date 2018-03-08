@@ -1,7 +1,11 @@
+/* React */
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
+import { Collapsible, CollapsibleItem } from 'react-materialize';
+/* Vendor */
+import moment from 'moment';
+/* Custom */
 import Topic from '../containers/topic';
 
 class Reply extends React.Component {
@@ -10,32 +14,33 @@ class Reply extends React.Component {
         this.state = {};
     };
 
-    render() {
+    renderHeader() {
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col s12">
-                        <div className="card horizontal z-depth-3">
-                            <div className="card-image">
-                                <img className="profile-avatar" src={this.props.Reply.user.profile_image_url_https} alt="" />
-                            </div>
-                            <div className="card-stacked">
-                                <div className="card-content">
-                                    <div className="tweet-header">
-                                        <p className="text-muted">{this.props.Reply.user.screen_name}@{this.props.Reply.id_str}</p>
-                                    </div>
-                                    <div className="tweet-details">
-                                        <p>{this.props.Reply.text}</p>
-                                    </div>
-                                    <div className="tweet-footer">
-                                        <p>{this.props.Reply.created_at}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div className="tweet-header">
+                <div className="tweet-block">
+                    <ul className="tweet-list">
+                        <li><img className="tweet-profile-avatar z-depth-5" src={this.props.Reply.user.profile_image_url_https} alt="" /></li>
+                        <li><strong><a href="">{this.props.Reply.user.screen_name}</a></strong><small>@{this.props.Reply.user.name}</small></li>
+                    </ul>
                 </div>
             </div>
+        );
+    };
+
+    render() {
+        return (
+            <CollapsibleItem header={this.renderHeader()} onSelect={this.props.onSelect}>
+                <div className="tweet-body">
+                    <p>{decodeURIComponent(this.props.Reply.text)}</p>
+                    <p><small>-{moment().format('MMMM Do YYYY, h:mm:ss a', this.props.Reply.created_at)}</small></p>
+                    <div className="tweet-block">
+                        <ul className="tweet-list">
+                            <li><a><i className="material-icons">repeat</i>{this.props.Reply.retweet_count}</a></li>
+                            <li><a><i className="material-icons">favorite</i>{this.props.Reply.favorite_count}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </CollapsibleItem >
         );
     };
 };

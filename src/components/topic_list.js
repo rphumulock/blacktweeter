@@ -1,4 +1,5 @@
 import React from 'react';
+import { Collapsible } from 'react-materialize'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -12,16 +13,17 @@ class TopicList extends React.Component {
 
     renderTopics(topic) {
         return (
-            <div className="row" key={topic.Key}>
-                <Topic topic={topic} />
-            </div >
+            <Topic key={topic.Key} Topic={topic}  />
         );
     };
 
     render() {
         return (
-            <div className="container">
-                {this.props.topics.map(this.renderTopics)}
+            <div className="topic-list">
+                <h6>TOPIC LIST</h6>
+                <Collapsible popout accordion>
+                    {this.props.topics.map(this.renderTopics)}
+                </Collapsible>
             </div>
         );
     };

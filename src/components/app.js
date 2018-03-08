@@ -14,7 +14,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div id="app-body">
+      <div id="app">
         <CreateTopic />
         <TopicList />
       </div>

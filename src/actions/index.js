@@ -5,35 +5,6 @@ import {
     FETCH_ALL
 } from '../constants/constants';
 
-/* OPTIMIZE THIS LATER 
-export const pushTopic = (topic) => {
-    return (dispatch) => {
-        firebase.database().ref('Topics').once("value").then((snapShot) => {
-            const action = {
-                type: PUSH_TOPIC
-            }
-            let found = false;
-            snapShot.forEach((childSnapshot) => {
-                let child = childSnapshot.val()
-                if (child.Topic === topic) {
-                    found = true;
-                }
-            });
-            if (found) {
-                action.payload = 'DUPLICATE';
-                dispatch(action);
-            } else {
-                action.payload = {
-                    Topic: topic
-                }
-                const key = firebase.database().ref('Topics').push({ Topic: topic }).key;
-                action.payload.key = key;
-                dispatch(action);
-            }
-        });
-    };
-};*/
-
 /* OPTIMIZE THIS LATER */
 export const pushTweet = (id, topicKey) => {
     return (dispatch) => {

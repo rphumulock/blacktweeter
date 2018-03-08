@@ -1,10 +1,12 @@
-/* VENDOR */
+/* Firebase */
+import firebase from '../config/firebase';
+/* React */
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-/* USER */
+import { Collapsible, CollapsibleItem } from 'react-materialize';
+/* CUSTOM */
 import { pushTopic } from '../actions/index';
-import firebase from '../config/firebase';
 
 class CreateTopic extends React.Component {
     constructor(props) {
@@ -37,29 +39,31 @@ class CreateTopic extends React.Component {
         });
     }
 
+    renderHeader() {
+        return (
+            <div className="topic-header">
+                <strong>CREATE TOPIC</strong>
+            </div>
+        );
+    }
+
     render() {
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col s12">
-                        <div className="card z-depth-2">
-                            <div class="card-content blue card-title white-text z-depth-2">Create Topic</div>
-                            <div className="row">
-                                <div className="card-action">
-                                    <form className="col s12" onSubmit={this.onFormSubmit}>
-                                        <div className="row">
-                                            <div className="input-field col s12">
-                                                <input id="topic" type="text" className="validate" value={this.state.topic} onChange={this.onInputChange} />
-                                                <label htmlFor="topic">Enter Topic Name</label>
-                                                <button className="btn waves-effect waves-light blue" type="submit" name="action">Submit</button>
-                                            </div>
-                                        </div>
-                                    </form>
+            <div className="topic-creation">
+                <h6>TOPIC CREATION</h6>
+                <Collapsible popout accordion>
+                    <CollapsibleItem header={this.renderHeader()} onSelect={this.props.onSelect}>
+                        <div className="form">
+                            <form onSubmit={this.onFormSubmit}>
+                                <div className="input-field">
+                                    <input id="topic" type="text" className="validate" value={this.state.topic} onChange={this.onInputChange} />
+                                    <label htmlFor="topic">Enter Topic Name</label>
+                                    <button className="btn waves-effect waves-light blue" type="submit" name="action">Submit</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-                    </div>
-                </div>
+                    </CollapsibleItem>
+                </Collapsible>
             </div>
         );
     };
