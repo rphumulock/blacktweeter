@@ -40,10 +40,6 @@ body {
     padding: 0 2rem;
 }
 
-.tweet-text {
-    background-color: white;
-}
-
 .tweet-block {
     margin: 5px 0 0 0;
 }
@@ -76,4 +72,12 @@ ul.tweet-list li {
 
 a {
     cursor: pointer;
+}
+.tweet-text {
+    padding: 10px;
+}
+
+img {
+    height: 40px;
+    width: 40px;
 }

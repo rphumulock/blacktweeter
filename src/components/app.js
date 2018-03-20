@@ -8,22 +8,11 @@ import TopicList from '../components/topic_list';
 
 class App extends React.Component {
 
-  componentWillMount() {
-    this.props.fetchAll();
-  }
-
   render() {
     return (
       <div id="app">
-        <CreateTopic />
         <TopicList />
       </div>
     );
   };
 };
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchAll }, dispatch);
-};
-
-export default connect(null, mapDispatchToProps)(App);

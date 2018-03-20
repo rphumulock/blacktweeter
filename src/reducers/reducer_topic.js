@@ -10,19 +10,3 @@ export default function (state = [], action) {
             return state;
     }
 }
-
-/*case PUSH_TOPIC:
-            console.log('REDUCER PUSH_TOPIC');
-            console.log(action.payload);
-            //if (action.payload === 'DUPLICATE') {
-                return state;
-            //} else {
-              //  return [action.payload, ...state];
-            //}
-        case PUSH_TWEET:
-            console.log('REDUCER PUSH_TWEET');
-            console.log(action.payload);
-            return state;
-        //case FETCH:
-            //console.log('REDUCER FETCH');
-            //return [...action.payload, ...state];*/

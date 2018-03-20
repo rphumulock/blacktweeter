@@ -10,20 +10,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.17.1",
     "bootstrap": "^4.0.0",
     "firebase": "^4.9.0",
     "materialize-css": "^0.100.2",
     "moment": "^2.21.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-infinite": "^0.12.1",
+    "react-infinite-scroller": "^1.1.3",
     "react-materialize": "^2.0.7",
     "react-modal": "^3.1.11",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0",
-    "twit": "^2.2.9"
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
